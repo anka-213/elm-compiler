@@ -1,0 +1,22 @@
+-- TYPE MISMATCH -------------------------------------------------- src/Main.elm
+
+Something is off with the body of the `empty` definition:
+
+ 8|>    { head = { defaultTitle = "", siteName = "" }
+ 9|>    , equipment = { intro = "", count = 0 }
+10|>    , page = {}
+11|>    }
+
+The body is a record of type:
+
+    { head : { siteName : String, defaultTitle : String }
+    , page : {}
+    , equipment : { count : Int, intro : String }
+    }
+
+But the type annotation on `empty` says it should be:
+
+    Translations
+
+Hint: Looks like the heading field is missing.
+

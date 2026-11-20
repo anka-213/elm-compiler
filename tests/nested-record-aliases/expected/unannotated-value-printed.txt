@@ -1,0 +1,12 @@
+-- TYPE MISMATCH -------------------------------------------------- src/Main.elm
+
+Addition does not work with this value:
+
+12|     translations + 1
+        ^^^^^^^^^^^^
+This `translations` value is a:
+
+    All.Translations
+
+But (+) only works with Int and Float values.
+

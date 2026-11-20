@@ -1,0 +1,16 @@
+-- AMBIGUOUS OVERLOAD --------------------------------------------- src/Main.elm
+
+I cannot tell which definition of Describe.describe this use needs:
+
+9|     Describe.describe Value.listed
+       ^^^^^^^^^^^^^^^^^
+The type it dispatches on came out as:
+
+    { head : { siteName : String, defaultTitle : String }
+    , page : { heading : String }
+    , equipment : { count : Int, intro : String }
+    }
+
+which is not a specific enough type to pick a definition. Adding a type
+annotation that says which type you mean should settle it.
+

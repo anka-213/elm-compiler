@@ -1,0 +1,14 @@
+-- TYPE MISMATCH -------------------------------------------------- src/Main.elm
+
+This record does not have a `intr` field:
+
+8|     model.flags.translations.equipment.intr
+                                          ^^^^
+This is usually a typo. Here are the fields that are most similar:
+
+    { intro : String
+    , count : Int
+    }
+
+So maybe intr should be intro?
+

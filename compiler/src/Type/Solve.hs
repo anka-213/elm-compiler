@@ -15,6 +15,7 @@ import qualified Data.Vector.Mutable as MVector
 import qualified Crash
 
 import qualified AST.Canonical as Can
+import qualified AST.Utils.Type as Type
 import qualified AST.Prim.Name as N
 import qualified AST.Prim.TypeVar as T
 import qualified Reporting.Annotation as A
@@ -953,7 +954,7 @@ srcTypeToVar rank pools flexVars srcType =
     Can.TAlias home name args aliasType ->
       do  argVars <- traverse (traverse go) args
           aliasVar <-
-            case aliasType of
+            case Type.aliasBodyToConvert args aliasType of
               Can.Holey tipe ->
                 srcTypeToVar rank pools (Map.fromList argVars) tipe
 

@@ -1,0 +1,16 @@
+-- TYPE MISMATCH -------------------------------------------------- src/Main.elm
+
+Something is off with the body of the `heading` definition:
+
+8|     model.flags.translations.page.heading
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The value at .heading is a:
+
+    String
+
+But the type annotation on `heading` says it should be:
+
+    Int
+
+Hint: Want to convert a String into an Int? Use the String.toInt function!
+

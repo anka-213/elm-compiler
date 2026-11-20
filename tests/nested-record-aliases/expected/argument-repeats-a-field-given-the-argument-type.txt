@@ -1,0 +1,14 @@
+-- TYPE MISMATCH -------------------------------------------------- src/Main.elm
+
+Something is off with the body of the `x` definition:
+
+13|     { i = 1, a = "s" }
+        ^^^^^^^^^^^^^^^^^^
+The body is a record of type:
+
+    { a : String, i : Int }
+
+But the type annotation on `x` says it should be:
+
+    Outer { a : String }
+

@@ -1,0 +1,13 @@
+-- TYPE MISMATCH -------------------------------------------------- src/Main.elm
+
+This record does not have a `title` field:
+
+8|     model.flags.translations.page.title
+                                     ^^^^^
+This is usually a typo. Here are the fields that are most similar:
+
+    { heading : String
+    }
+
+So maybe title should be heading?
+

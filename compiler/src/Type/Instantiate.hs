@@ -10,6 +10,7 @@ import qualified Data.Map.Strict as Map
 import qualified Data.Map.Utils as Map
 
 import qualified AST.Canonical as Can
+import qualified AST.Utils.Type as Type
 import qualified AST.Prim.TypeVar as T
 import Type.Type
 
@@ -43,7 +44,7 @@ fromSrcType freeVars sourceType =
     Can.TAlias home name args aliasedType ->
       do  targs <- traverse (traverse (fromSrcType freeVars)) args
           AliasN home name targs <$>
-            case aliasedType of
+            case Type.aliasBodyToConvert args aliasedType of
               Can.Filled realType ->
                 fromSrcType freeVars realType
 

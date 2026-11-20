@@ -1,0 +1,14 @@
+-- TYPE MISMATCH -------------------------------------------------- src/Main.elm
+
+Something is off with the body of the `x` definition:
+
+9|     { inner = { a = "s" } }
+       ^^^^^^^^^^^^^^^^^^^^^^^
+The body is a record of type:
+
+    { inner : { a : String } }
+
+But the type annotation on `x` says it should be:
+
+    W { a : String }
+

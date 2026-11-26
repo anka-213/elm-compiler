@@ -66,9 +66,15 @@ jobs:
           # Intel (macos-13) was dropped: GitHub retired the macos-13 runner
           # image on 2025-12-04, so an x86_64 build would queue forever. Apple
           # Silicon customers use darwin-arm64; it also runs under Rosetta 2.
+          # macos-14 is no longer offered either ("The configuration
+          # 'macos-14-arm64-us-default' is not supported").
           - asset: elm-darwin-arm64
-            runner: macos-14      # Apple Silicon
+            runner: macos-15      # Apple Silicon
     runs-on: ${{ matrix.runner }}
+    # The oldest macOS the binary runs on. Without it the toolchain uses the
+    # build machine's version.
+    env:
+      MACOSX_DEPLOYMENT_TARGET: '14.0'
     steps:
       - uses: actions/checkout@v7
         with:
@@ -95,6 +101,12 @@ jobs:
 
       - name: Smoke test
         run: ./elm --version
+
+      - name: Check minimum macOS
+        run: |
+          minos=$(otool -l ./elm | awk '$1 == "minos" { print $2; exit }')
+          echo "minimum macOS: $minos"
+          [ "$minos" = "$MACOSX_DEPLOYMENT_TARGET" ]
 
       - name: Package
         run: gzip -9 -c ./elm > ${{ matrix.asset }}.gz
@@ -149,7 +161,7 @@ jobs:
           path: elm-win32-x64.zip
           if-no-files-found: error
 
-  # --- Gather all five artifacts and publish them as a DRAFT release. The team
+  # --- Gather every build's artifact and publish them as a DRAFT release. The team
   # reviews the draft and clicks publish before customers see it. ---
   release:
     name: Publish draft release
